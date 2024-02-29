@@ -1,0 +1,20 @@
+.demo-box{
+    display: flex;
+    flex-wrap: wrap;
+}
+.demo-content{
+    margin: 8px;
+}
+.demo-content .contain{
+    height: 200px;
+    width: 140px;
+}
+.zebra-crossing{
+    background: linear-gradient(#f6f 50%, #f0f0f0 50%);
+    background-size: 100% 40px;
+    
+}
+.zebra-crossing-roate{
+    background: linear-gradient(to right,#f6f 50%, #f0f0f0 50%);
+    background-size: 40px 100%;
+}

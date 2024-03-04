@@ -1,20 +1,223 @@
-.demo-box{
-    display: flex;
-    flex-wrap: wrap;
+:root{
+    --d:20%;
 }
-.demo-content{
-    margin: 8px;
+.demo-box {
+  display: flex;
+  flex-wrap: wrap;
 }
-.demo-content .contain{
-    height: 200px;
+.demo-content {
+  margin: 8px;
+}
+.demo-content .contain {
+  height: 200px;
+  width: 140px;
+  position: relative;
+}
+.zebra-crossing {
+  background: linear-gradient(#f6f 50%, #f0f0f0 50%);
+  background-size: 100% 40px;
+}
+.zebra-crossing-vertical {
+  background: linear-gradient(to right, #f6f 50%, #f0f0f0 50%);
+  background-size: 40px 100%;
+}
+.zebra-crossing-roate {
+  background: linear-gradient(
+    45deg,
+    #fb3 25%,
+    #58a 0,
+    #58a 50%,
+    #fb3 0,
+    #fb3 75%,
+    #58a 0
+  );
+  background-size: 42.43px 42.43px;
+}
+.zebra-crossing-roate {
+  background: repeating-linear-gradient(
+    45deg,
+    #fb3,
+    #fb3 15px,
+    #58a 0,
+    #58a 30px
+  );
+}
+
+.zebra-crossing-roate {
+  background: repeating-linear-gradient(
+    45deg,
+    #fb3 0,
+    #fb3 25%,
+    #58a 0,
+    #58a 50%
+  );
+  background-size: 42.43px 42.43px;
+}
+.zebra-crossing-repeating {
+  background: #58a;
+  background-image: repeating-linear-gradient(
+    30deg,
+    hsla(0, 0%, 100%, 0.1),
+    hsla(0, 0%, 100%, 0.1) 15px,
+    transparent 0,
+    transparent 30px
+  );
+}
+.base-progress {
+  position: relative;
+  width: 300px;
+  height: 14px;
+  border-radius: 7px;
+  border: 1px solid red;
+}
+.base-progress .active-progress {
+  position: absolute;
+  left: 0;
+  top: 10px;
+  transform: translate(0, -50%);
+  width: 120px;
+  height: 14px;
+  border-radius: 7px;
+  background: repeating-linear-gradient(
+    135deg,
+    blue,
+    blue 10px,
+    pink 10px,
+    pink 20px
+  );
+  background-size: 28px 14px;
+  animation: progressAnimation 1s linear infinite;
+}
+
+@keyframes progressAnimation {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    background-position: 28px 0;
+  }
+}
+.gradient-animate {
+    transition: ease-in .3s;
+    background: linear-gradient(0, #108b96 2px, #108b96 2px) no-repeat, 
+                linear-gradient(-90deg, #108b96 2px, #108b96 2px) no-repeat, 
+                linear-gradient(-180deg, #108b96 2px, #108b96 2px) no-repeat, 
+                linear-gradient(-270deg, #108b96 2px, #108b96 2px) no-repeat;
+    background-size: 0 2px, 2px 0, 0 2px, 2px 0;
+    background-position: left top, right top, right bottom, left bottom;
+}
+.gradient-animate:hover {
+    background-size: 100% 2px,  2px 100%, 100% 2px, 2px 100%;
+}
+
+.progress-circle{
+    background: conic-gradient(#179067, #62e317, #d7f10f, #ffc403, #fcc202, #ff7327, #ff7327, #FF5800, #ff5900, #f64302, #ff0000, #ff0000);
     width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    position: relative;
 }
-.zebra-crossing{
-    background: linear-gradient(#f6f 50%, #f0f0f0 50%);
-    background-size: 100% 40px;
-    
+.progress-circle circle {
+    stroke-dasharray: 880;
+    stroke: #f2f2f2;
 }
-.zebra-crossing-roate{
-    background: linear-gradient(to right,#f6f 50%, #f0f0f0 50%);
-    background-size: 40px 100%;
+
+.progress-circle {
+    transform: rotate(-90deg);
+}
+.progress-circle .circle-mask {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2;
+    width: 100px;
+    height: 100px;
+    background: #fff;
+    border-radius: 50%;
+}
+
+.inverted-box {
+    background: #ebebeb;
+    width: 140px;
+    border-radius: 24px;
+    overflow: hidden;
+}
+.inverted-box .inverted {
+    padding: 0 8px;
+    display: flex;
+    justify-content: space-between;
+    background: linear-gradient(-90deg, #000 var(--d), #fff 0) no-repeat, linear-gradient(-90deg, #0000 var(--d), rgb(192, 23, 23) 0) no-repeat;
+    -webkit-background-clip: text, padding-box;
+    background-clip: text, padding-box;
+    color: #0000;
+    font-size: 12px;
+    cursor: pointer;
+}
+.wave-container {
+    width: 140px;
+    height: 140px;
+    border: 5px solid rgb(118, 218, 255);
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+}
+.wave-change {
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    left: 0;
+    top: 0;
+    animation: change 12s infinite linear;
+}
+.wave-change::before,.wave-change::after{
+    content: "";
+    position: absolute;
+    width: 140px;
+    height: 140px;
+    top: 0;
+    left: 50%;
+    background-color: rgba(255, 255, 255, .6);
+    border-radius: 45% 47% 43% 46%;
+    transform: translate(-50%, -70%) rotate(0);
+    animation: rotate 7s linear infinite;
+    z-index: 1;
+}
+.wave-change::after {
+    border-radius: 47% 42% 46% 44%;
+    background-color: rgba(255, 255, 255, .8);
+    transform: translate(-50%, -70%) rotate(0);
+    animation: rotate 9s linear -4s infinite;
+    z-index: 2;
+}
+.wave {
+    position: relative;
+    width: 140px;
+    height: 140px;
+    background-color: rgb(118, 218, 255);
+    border-radius: 50%;
+}
+
+.wave-container p {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 36px;
+    color: #000;
+    z-index: 10;
+}
+
+@keyframes rotate {
+   to {
+        transform: translate(-50%, -70%) rotate(360deg);
+    }
+}
+@keyframes change {
+    from {
+        top: 80px;
+    }
+    to {
+        top: -10px;
+    }
 }

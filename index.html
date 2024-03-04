@@ -2,7 +2,7 @@
  * @Author: jingzi 1163478123@qq.com
  * @Date: 2024-02-29 11:12:58
  * @LastEditors: jingzi 1163478123@qq.com
- * @LastEditTime: 2024-02-29 16:05:52
+ * @LastEditTime: 2024-03-03 22:17:40
  * @Description: 各种样式修改
  * Copyright (c) 2024 by ${git_name}, All Rights Reserved. 
 -->
@@ -15,7 +15,10 @@
     <link rel="stylesheet" href="./css/style.css">
 </head>
 <body>
-    <h2>斑马线样式</h2>
+    <div>
+        <h2>斑马线样式</h2>
+        <p>ps：同名表示多个写法</p>
+    </div>
     <div class="demo-box">
         <div class="demo-content">
             <h3>正常样式</h3>
@@ -23,8 +26,107 @@
         </div>
         <div class="demo-content">
             <h3>竖条纹样式</h3>
+            <div class="zebra-crossing-vertical contain"></div>
+        </div>
+        <div class="demo-content">
+            <h3>角度条纹样式</h3>
             <div class="zebra-crossing-roate contain"></div>
         </div>
+        <div class="demo-content">
+            <h3>角度条纹样式</h3>
+            <div class="zebra-crossing-repeating contain"></div>
+        </div>
+        <div class="demo-content">
+            <h3>动态条纹</h3>
+            <div class="base-progress contain">
+                <div class="active-progress"></div>
+            </div>
+        </div>
+        <div class="demo-content">
+            <h3>动态边框</h3>
+            <div class="gradient-animate">鼠标移入看效果</div>
+        </div>
+    </div>
+    <div>
+        <h2>进度条</h2>
+    </div>
+    <div class="demo-box">
+        <div class="demo-content">
+            <h3>环状进度条</h3>
+            <div class="contain">
+                拖动改变进度：<input id="" type="range" onchange="progressCircle(this.value)">
+                <div class="progress-circle" id="progress-circle-box">
+                    <svg id="progress-circle" width="140" height="140">
+                        <circle r="60" cx="70" cy="70" stroke-width="21" fill="transparent" />
+                    </svg>
+                    <div class="circle-mask"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-content">
+            <h3>圆型进度条</h3>
+            <div class="contain">
+                <div class="wave-container">
+                    <p>12%</p>
+                    <div class="wave-change"></div>
+                    <div class="wave"></div>
+                </div>
+            </div>
+        </div>
+        <div class="demo-content">
+            <h3>横向进度条</h3>
+            <div class="contain">
+                <div class="inverted-box">
+                    <div class="inverted">
+                        <div class="inverted-item">888w/12</div>
+                        <div class="inverted-item">100%/10s</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2>sticky 定位详解</h2>
+    <div class="sticky-demo">
+        1）必须指定 top, right, bottom 或 left 中的任何一个值，否则不会生效，相当于设置 相对定位<br/>
+        2）垂直滚动时，粘性约束元素的高度要大于 sticky 元素的高度<br/>
+        3）粘性约束元素和容器元素之间不能存在overflow:hidden 的元素<br/>
+        PS: Internet Explorer, Edge 15 及更早 IE 版本不支持 sticky 定位。 Safari 需要使用 -webkit- prefix 
     </div>
 </body>
 </html>
+<script>
+    /**
+     * 环状进度条
+     */
+    const progressCircleDraw = (value)=>{
+        if (!value || !document) return
+        const circle = document.querySelector(`#progress-circle circle`)
+        if (!circle) return
+        const radius = circle.r.baseVal.value
+        const outerRadius = circle.cx.baseVal.value
+
+        const innerCircumference = radius * 2 * Math.PI
+        const outerCircumference = outerRadius * 2 * Math.PI
+        const setProgress = (percent)=> {
+            const progress = (percent / 100) * innerCircumference
+            const userAgent = navigator.userAgent
+            if (userAgent.indexOf('Safari') > -1 && userAgent.indexOf('Chrome') < 0) {
+            circle.style.strokeDashoffset = (outerCircumference + (outerCircumference - progress)) + ''
+            } else {
+            circle.style.strokeDashoffset = -(progress) + ''
+            }
+        }
+        setProgress(value); //设置初始进度
+    }
+    progressCircleDraw(50)
+    const progressCircle = (value)=>{
+        progressCircleDraw(value)
+    }
+    function modifyProg(prog) {
+        let val = 100 - prog
+        document.documentElement.style.setProperty('--d', val + '%')
+    }
+    modifyProg(26)
+</script>
